@@ -1,0 +1,192 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13740\viewh15120\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+
+\fs72 ATS Snow Suite\
+\
+
+\b\fs36 What does it do?\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 This package provides a bunch of shaders giving you procedural generated snow on terrains, trees (including billboards), grass and foliage and any game object \'96 fully controllable via script.\
+
+\b \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\fs36 \cf0 How does it work?\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 before we get into details about setting up your scene and assets, lets talk a bit about the way the shaders work and add snow to give you a short overview on how all the magic happens.\
+\
+
+\b Snow Accumulation
+\b0 \
+The overall distribution of snow in your scene is controlled by 2 global variables "SnowAmount" and "SnowStartHeight" \'96 which determine whether there shall be snow at a given height in your scene and how much.\
+The detail distribution of snow is calculated per pixel usually taking the surface normal in worldspace, the detail normal coming from the normal map and some kind of heightmap (usually genereted from the blue value of the main texture) into account, accumulating snow primary at deep (heightmap = dark pixel) parts of the surfaces.\
+\
+
+\b Limits and Problems
+\b0 \
+Due to the fact that we don\'92t have any accurate heightmap you might notice some artifacts or even "bugs":\
+1.) bright textures will get less snow than dark textures (see "soil_sand_1024" texture on the demo terrain).\
+2.) textures in which dark pixels do not mark deep areas will get a reverse snow accumulation (see "sand 512" texture on the demo terrain).\
+\
+Solutions:\
+1.) At least on the terrain you have the possibility to specify a "SnowPower" factor for each texture to minimize this effect. All other shaders do not offer this possibility.\
+2.) no solution provided yet\
+\
+To get rid of both 1.) and 2.) you would have to add a "real" heightmap (e.g. in the texture\'92s alpha channel) but that would raise the shader\'92s complexity and needed texture memory even more. \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Terrain\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 The terrain shader of this package replace the original "first-pass-shader" and supports up to 4 detail textures plus 4 detail normal maps.\
+It adds automatically snow to areas above the "SnowStartHeight" according to the globally set "SnowAmount" value.\
+The shader does not support snow on the automatically generated basemap of your terrain.\
+So either set up the basemap distance to a very heigh level or hide it in fog.\
+\
+
+\b Snow Shadows
+\b0 \
+Additionally you can create "Snow Shadows" \'96 special areas where you don\'92t want to have snow (at least not at moderate "SnowAmount" values). The demo shows such "Snow Shadows" e.g. under the bridge and at the pivot of (most) trees.\
+"Snow Shadows" are controlled by a special snow distribution texture located in the alpha channel of the base snow texture.\
+That texture can easily be created adding a directional light to your scene which points exactly into the same direction as your imaginary wind. make it cast shadows, mark all game objects you want to drop "snow shadows" as "static" and render a single lightmap just of the terrain.\
+Now open the lightmap in photoshop, adjust it curves to eliminate all soft shadows and bring it to the alpha channel of your snowtexture.\
+Just have a look at the "snow_snowDistributionTexForTerrain" texture to find out more.\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Trees\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 Only trees modeled with the built in tree creator are supported.\
+The overall distribution of snow on trees is controlled by the global variables "SnowAmount" and "SnowStartHeight". "Snow Shadows" do not effect trees.\
+The detail distribution on the different parts of a tree is controlled by its texture, normal map, ambient occlusion and translucency map \'96\'a0quite complex and you might want to simplify the shader here and there\'85\
+\
+
+\b Preparing the tree\
+
+\b0 In order to make your tree being effected by snow you will have to assign the modified shaders to the tree prefab.\
+Do so by creating 2 new materials (bark and leaves), then assign the "TreeCreatorBarkOptimizedSnow" and "TreeCreatorLeavesOptimizedSnow" to those materials by just dragging the shader onto the material within the project tab. Now you can assign the textures of the tree created by the tree creator to the materials.\
+Then edit your prefab and drag the new materials to the material slots within the inspector.\
+Please note: Whenever you make any change to your tree unity will reassign the original materials, so you will have to assign the new materials again.\
+That\'92s it.\
+\
+
+\b Tree bark\
+
+\b0 In order to reduce the effect described in "How does it work? -> Limits and Problems" the "TreeCreatorBarkOptimizedSnow" shader offers an additional parameter called "SnowStrength" so you can adjust the amount of snow precisely for any kind of bark texture / material.\
+\
+
+\b Billboards\
+
+\b0 Billboards will also be effected by snow according to the "SnowAmount" value \'96 whereas they do not automatically react to the "SnowStartHeight" parameter.\
+In case you paint a tree using the snow shaders on parts of the terrain below the "SnowStartHeight" then its mesh tree instances will be rendered correctly (without snow) but billboards will get snow.\
+So in case you want to have trees below the "SnowStartHeight" make sure those use the standard shaders. billboards of those trees will never be effected by snow.\
+In the demo i use just 2 copies of the same prefab: snow and summer.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 Grass\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 The package ships with 2 grass shaders which will replace the original ones and supports grass placed as texture and grass placed as detail mesh using the grass shader on the terrain. It does not support grass textures rendered as billboards.\
+\
+Grass fully reacts to any change of the snow amount and will automatically take the "SnowStartHeight" into account, so on parts of the terrain where there is no snow, grass also will not get covered by any.\
+But grass is not effected by the "snowDistribution" map of the terrain. so even if you have assigned any "snow shadows" grass will be covered by snow when placed in those shadows.\
+\
+
+\b Adding Grass as texture
+\fs72 \
+
+\b0\fs28 Just add your grass texture to the terrain, uncheck the checkbox "billboard" and make sure that you have chosen some shades of grey as healthy and dry color as those colors will also get mixed with the procedural added snow. and i am pretty sure that you neither want green nor even red snow\'85\
+in case you need more color variation on the grass, duplicate the texture, edit it in photoshop, then add this second grass texture to the terrain.
+\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\fs28 \cf0 Adding Grass as detail mesh
+\fs72 \
+
+\b0\fs28 Well, this is a bit more complicated, as the shader for detail meshes uses its own bending function which nearly eliminates the common floating you will get when using the built in shaders.\
+\
+As bending is controlled by vertex colors you will have to assign vertex colors first to the grass mesh in your 3d App. Make sure that the whole model is covered by white, than chose the vertex color alpha channel and set the lower vertices which you don\'92t want to bend to vertexcolor.alpha = 0.\
+the upper vertices should have  vertexcolor.alpha = 1 for full bending \'96 or in case you would like to have some variety in bending \'96 any value above 0.\
+\
+In case you have added grass as detail mesh please make sure that the shaders "Camera-DepthNormalTexture" and "Camera-DepthTexture" both located in the folder "Ressources" in "Shaders/Terrain" are still part of your project and compile correctly. otherwise your might see some strange artifacts when rendering in deffered mode or using depth based image effects like SSAO.
+\b\fs36 \
+\
+Game Objects\
+
+\b0\fs28 The shader "snowShaderBumpedDiffuse" can be used on any regular game object and will fully react to both "SnowAmount" and "SnowStartHeight" \'96 although i would not suggest to use it one objects of which you know that they will be never effected by snow, because it is more expensive to render than a standard bumped diffuse shader.\
+As far as other shader are concerned (e.g. alpha cutout): the provided shader is a pretty simple surface shader and should be easy to tweak to your needs.\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b\fs36 \cf0 CustomTerrainScriptAtsV3Snow.cs
+\b0\fs28 \
+Assign this script to your terrain to setup all values and textures needed by the snow suite:\
+\
+Bump 0 \'96 3: Slots for the detail normal maps\
+Terrain Size X: x Size of the terrain in meters\
+Terrain Size Y: y Size of the terrain in meters\
+Snow Power Tex 0 \'96 3: when using pretty different textures on the terrain use this to harmonize the snow distribution (see "Limits and Problems"): < 1.0 = less snow on the givven texture / > 1.0 more snow on the given texture\
+Snow Shininess: Snow Shininess\
+Snow Amount: How much snow shall there be (use it in a range of 0.0 \'96 1.0)\
+Snow Start Height: From which height on shall there be snow\
+Snow Texture: general snow texture (rgb) snow distribution map for the terrain (a)\
+Snow Tile: Size of the snow texture tile on the terrain in meters\
+\
+Please note: The script contains some lines of code which should be deleted in the final built.\
+\
+\
+\
+
+\b\fs36 FAQ\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0\fs28 \cf0 \
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 the shaders do not seem to work.\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 --> after having assigned all textures/values to the "CustomTerrainScriptAtsV3Snow" you have to hit "run" first to have all data provided to the shader. do this whenever you make any changes as far as tecures are concerned.\
+--> reimport the shaders.\
+\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 the terrain shader falls back to a texture without any snow on far viewing distances \
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 --> that is the built in basemap which is not effected by the snowshader. So either set up the basemap distance to a very heigh level or hide it in fog.\
+\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 my framerate has dropped!\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 --> the shaders are much more complex then the built in ones. next to that they need more textures which will take some memory bandwidth.\
+\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 anything else?\
+\pard\tx560\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 --> just follow the official thread: \
+\
+\
+\
+}
