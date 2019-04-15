@@ -70,7 +70,6 @@
     <Compile Include="Assets\BigMapLoad\Scripts\Core\MonoThread.cs" />
     <None Include="Assets\TerrainSlicing\Unity4_x_x_users_READ_ME_FIRST.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Neighboring_Quick_Start.txt" />
-    <None Include="Assets\BigMapLoad\大地图加载方案.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Slicing_Quick_Start.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

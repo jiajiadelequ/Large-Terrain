@@ -31,11 +31,8 @@ public class ChunkController : MonoBehaviour
     /// </summary>
     ChunkVector2 m_currentPos;
 
-    /// <summary>
-    /// 期望的块列表
-    /// </summary>
-    [SerializeField]
-    List<ChunkVector2> m_expectChunkPosList = new List<ChunkVector2>(25);
+
+   
 
     /// <summary>
     /// 当前的块列表
@@ -62,21 +59,28 @@ public class ChunkController : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 25; i++)
-        {
-            m_expectChunkPosList.Add(new ChunkVector2());
-        }
-
         InitMap();
     }
 
-       void Update()
+    protected virtual void InitMap()
     {
-        var currentPos = GetCurrentChunkVector(m_player.position);
-        if (IsChange(currentPos))//当前块位置发生改变 则更新当前块列表
+        //先确定玩家位置，得到玩家所在块的位置  
+        ChunkVector2 currentPos = GetCurrentChunkVector(m_player.position);
+        m_currentPos = currentPos;
+        //利用块的位置获取实际块列表
+        List<ChunkVector2> actChunkList = GetActualChunkList(currentPos);
+        //再加载实际列表中的所有块
+        UpdateCurrentChunkList(actChunkList, currentPos);
+
+    }
+
+    void Update()
+    {
+        var realtimePos = GetCurrentChunkVector(m_player.position);
+        if (IsChange(realtimePos))//当前块位置发生改变 则更新当前块列表
         {
-            var list = GetActualChunkList(currentPos);
-            UpdateCurrentChunkList(list, currentPos);
+            var list = GetActualChunkList(realtimePos);
+            UpdateCurrentChunkList(list, realtimePos);
         }
     }
 
@@ -105,6 +109,11 @@ public class ChunkController : MonoBehaviour
     /// <returns></returns>
     List<ChunkVector2> GetActualChunkList(ChunkVector2 currentVector)
     {
+        ChunkVector2[] m_expectChunkPosList = new ChunkVector2[25];
+        for (int i = 0; i < 25; i++)
+        {
+            m_expectChunkPosList[i]=new ChunkVector2();
+        }
 
         int currentRow = currentVector.rowNum;
         int currentCol = currentVector.colNum;
@@ -122,11 +131,10 @@ public class ChunkController : MonoBehaviour
             }
         }
         List<ChunkVector2> actulChunkPosList = new List<ChunkVector2>();
-        for (int i = 0; i < m_expectChunkPosList.Count; i++)
+        for (int i = 0; i < m_expectChunkPosList.Length; i++)
         {
             if (m_chunkMap.ContainsKey(m_expectChunkPosList[i]))
             {
-                //var pos = m_chunkMap[expectChunkPosList[i]].position;
                 actulChunkPosList.Add(m_expectChunkPosList[i]);
             }
         }
@@ -134,7 +142,7 @@ public class ChunkController : MonoBehaviour
     }
 
     /// <summary>
-    /// 更新当前块列表
+    /// 对比当前块列表与实际块列表，并更新当前块列表
     /// </summary>
     /// <param name="actulChunkList">实际块列表</param>
     /// <param name="currentPos">当前中心块位置</param>
@@ -221,18 +229,5 @@ public class ChunkController : MonoBehaviour
         return ChunkState.UnLoad;
     }
 
-    #region Init
-    
-    protected virtual void InitMap()
-    {
-        //先确定玩家位置，得到玩家所在块的位置  
-        ChunkVector2 currentPos = GetCurrentChunkVector(m_player.position);
-        m_currentPos = currentPos;
-        //利用块的位置获取实际块列表
-        List<ChunkVector2> actChunkList = GetActualChunkList(currentPos);
-        //再加载实际列表中的所有块
-        UpdateCurrentChunkList(actChunkList, currentPos);
 
-    }
-    #endregion
 }
