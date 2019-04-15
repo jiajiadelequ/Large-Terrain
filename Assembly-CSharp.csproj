@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{08EBFD4C-64F7-F1A2-DC9A-B6255CD81324}</ProjectGuid>
+    <ProjectGuid>{2DC04911-719D-386F-3763-EF7249073C40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,54 +61,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Scripts\CustomTerrainScriptAtsV3Snow.cs" />
     <Compile Include="Assets\BigMapLoad\Example\Scripts\ChunkExample.cs" />
     <Compile Include="Assets\BigMapLoad\Example\Scripts\ChunkManagerExample.cs" />
     <Compile Include="Assets\BigMapLoad\Scripts\Core\Chunk.cs" />
     <Compile Include="Assets\BigMapLoad\Scripts\Core\ChunkController.cs" />
     <Compile Include="Assets\BigMapLoad\Scripts\Core\ChunkVector2.cs" />
-    <Compile Include="Assets\Tools\ArpIPManager.cs" />
-    <Compile Include="Assets\Tools\ArrayHelper.cs" />
-    <Compile Include="Assets\Tools\CustomList.cs" />
-    <Compile Include="Assets\Tools\DelegateHelper.cs" />
-    <Compile Include="Assets\Tools\DetailUtil.cs" />
-    <Compile Include="Assets\Tools\GameObjectPool.cs" />
-    <Compile Include="Assets\Tools\LogUtility.cs" />
-    <Compile Include="Assets\Tools\MonoSingleton.cs" />
-    <Compile Include="Assets\Tools\MonoThread.cs" />
-    <Compile Include="Assets\Tools\NetworkUtility.cs" />
-    <Compile Include="Assets\Tools\Singleton.cs" />
-    <Compile Include="Assets\Tools\StringHelper.cs" />
-    <Compile Include="Assets\Tools\TransformHelper.cs" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\Ressources\ShadersBuiltin\Camera-DepthTexture.shader" />
+    <Compile Include="Assets\BigMapLoad\Scripts\Core\MonoSingleton.cs" />
+    <Compile Include="Assets\BigMapLoad\Scripts\Core\MonoThread.cs" />
     <None Include="Assets\TerrainSlicing\Unity4_x_x_users_READ_ME_FIRST.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Neighboring_Quick_Start.txt" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\BillboardTreeSnow.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\Includes\atsWavingGrass vertexAlpha.cginc" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\TreeCreatorBarkRendertexSnow.shader" />
     <None Include="Assets\BigMapLoad\大地图加载方案.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Slicing_Quick_Start.txt" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\atsV3WavingGrassBillboardSnow.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\atsV3WavingGrassSnow vertexAlpha.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\TreeCreatorLeavesOptimizedSnow.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\Tree.cginc" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\TreeSnow.cginc" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\snowShaderBumpedDiffuse.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\Ressources\ShadersBuiltin\Camera-DepthNormalTexture.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Terrain\TerrainReplacementAtsV3Snow.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\TreeCreatorLeavesRendertexSnow.shader" />
-    <None Include="Assets\Art\0000 terrain snow\atsV3 UnityTerrainSnow Package\Shaders\Trees\TreeCreatorBarkOptimizedSnow.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -344,7 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{D4439F82-1F2E-6F24-897C-FA775BB52D64}</Project>
+      <Project>{3F79041D-7AAE-9571-41B4-5786822DDA05}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>

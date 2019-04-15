@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{AE55EF39-8BCA-C957-3BEA-F4FE2762B98A}</ProjectGuid>
+    <ProjectGuid>{609B89DB-56E1-D217-5E16-D0C8FC527B87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -62,21 +62,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BigMapLoad\Scripts\Editor\PrefabUtil.cs" />
-    <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
     <Reference Include="Assembly-UnityScript">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/UnityProjects/UnityProject_Skiing/Skiing2019/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/UnityProjects/UnityProject_Skiing/Large Terrain/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -366,11 +365,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{D4439F82-1F2E-6F24-897C-FA775BB52D64}</Project>
+      <Project>{3F79041D-7AAE-9571-41B4-5786822DDA05}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{08EBFD4C-64F7-F1A2-DC9A-B6255CD81324}</Project>
+      <Project>{2DC04911-719D-386F-3763-EF7249073C40}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>
