@@ -109,36 +109,22 @@ public class ChunkController : MonoBehaviour
     /// <returns></returns>
     List<ChunkVector2> GetActualChunkList(ChunkVector2 currentVector)
     {
-        ChunkVector2[] m_expectChunkPosList = new ChunkVector2[25];
-        for (int i = 0; i < 25; i++)
-        {
-            m_expectChunkPosList[i]=new ChunkVector2();
-        }
-
+        List<ChunkVector2> expectChunkPosList = new List<ChunkVector2>();
         int currentRow = currentVector.rowNum;
         int currentCol = currentVector.colNum;
 
-        int index = 0;
         for (int i = -2; i <= 2; i++)
         {
             for (int j = -2; j <= 2; j++)
             {
-                var temp = m_expectChunkPosList[index];
-                temp.rowNum = currentRow + i;
-                temp.colNum = currentCol + j;
-                m_expectChunkPosList[index] = temp;
-                index++;
+                int expRow = currentRow + i;
+                int expCol = currentCol + j;
+                if (expRow < 0 || expCol < 0 || expRow > m_row-1 || expCol > m_col-1)
+                    continue;
+                expectChunkPosList.Add(new ChunkVector2(expRow, expCol));
             }
         }
-        List<ChunkVector2> actulChunkPosList = new List<ChunkVector2>();
-        for (int i = 0; i < m_expectChunkPosList.Length; i++)
-        {
-            if (m_chunkMap.ContainsKey(m_expectChunkPosList[i]))
-            {
-                actulChunkPosList.Add(m_expectChunkPosList[i]);
-            }
-        }
-        return actulChunkPosList;
+        return expectChunkPosList;
     }
 
     /// <summary>
