@@ -132,11 +132,11 @@ public class ChunkManagerExample : MonoBehaviour
         for (int i = 0; i < currentCacheChunkList.Count; i++)
         {
             ChunkExample chunk = currentCacheChunkList[i];
-            if (!actulChunkList.Contains(chunk))//真实列表里若不存在当前列表的指定元素 则卸载删除
+            if (!actulChunkList.Contains(chunk))//实际列表里若不存在当前列表的指定元素 则卸载删除
             {
-                chunk.DisplayUnload();//卸载不存在于真实块列表的块
+                chunk.DisplayUnload();//卸载不存在于实际块列表的块
 
-                currentCacheChunkList.RemoveAt(i);//移除当前块列表中不存在与真实列表的块
+                currentCacheChunkList.RemoveAt(i);//移除当前块列表中不存在与实际列表的块
 
                 i--;//在遍历列表时删除列表元素 记得索引-1 否则无法正确遍历
             }

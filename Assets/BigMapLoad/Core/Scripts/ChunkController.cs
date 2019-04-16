@@ -138,11 +138,11 @@ public class ChunkController : MonoBehaviour
         {
             ChunkVector2 pos = m_currentChunkList[i];
             Chunk chunk = m_chunkMap[pos];
-            if (!actulChunkList.Contains(pos))//真实列表里若不存在当前列表的指定元素 则卸载删除
+            if (!actulChunkList.Contains(pos))//实际块列表里若不存在当前列表的指定元素 则卸载删除
             {
-                chunk.Unload();//卸载不存在于真实块列表的块
+                chunk.Unload();//卸载不存在于实际块列表的块
 
-                m_currentChunkList.RemoveAt(i);//移除当前块列表中不存在与真实列表的块
+                m_currentChunkList.RemoveAt(i);//移除当前块列表中不存在与实际块列表的块
 
                 i--;//在遍历列表时删除列表元素 记得索引-1 否则无法正确遍历
             }
@@ -178,7 +178,7 @@ public class ChunkController : MonoBehaviour
     /// <summary>
     /// 获取块坐标
     /// </summary>
-    /// <param name="position">块的具体vector3位置</param>
+    /// <param name="position">玩家的具体vector3位置</param>
     /// <returns></returns>
     ChunkVector2 GetCurrentChunkVector(Vector3 position)
     {
@@ -191,13 +191,13 @@ public class ChunkController : MonoBehaviour
     /// <summary>
     /// 获取指定块的相对状态
     /// </summary>
-    /// <param name="chunk">指定块</param>
+    /// <param name="specified">指定块</param>
     /// <param name="relativeVector">参照块坐标</param>
     /// <returns>相对块状态</returns>
-    ChunkState GetChunkStateByRelativePosition(ChunkVector2 chunk, ChunkVector2 relativePosition)
+    ChunkState GetChunkStateByRelativePosition(ChunkVector2 specified, ChunkVector2 relative)
     {
-        int rowAmount = Mathf.Abs(chunk.rowNum - relativePosition.rowNum);
-        int colAmount = Mathf.Abs(chunk.colNum - relativePosition.colNum);
+        int rowAmount = Mathf.Abs(specified.rowNum - relative.rowNum);
+        int colAmount = Mathf.Abs(specified.colNum - relative.colNum);
 
         if (rowAmount > 2 || colAmount > 2)
         {
