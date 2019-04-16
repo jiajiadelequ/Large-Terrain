@@ -39,11 +39,17 @@ public class Chunk
     {
     }
 
+    public void Display() { MonoThread.Instance.Excute(CoroutineDisplay()); }
+    public void Cache() {  MonoThread.Instance.Excute(CoroutineCache()); }
+    public void Unload() {MonoThread.Instance.Excute(CoroutineUnload()); }
+    
+    
+
     /// <summary>
     /// 展示出来
     /// </summary>
     /// <returns></returns>
-    IEnumerator Display()
+    IEnumerator CoroutineDisplay()
     {
         if (m_body == null)
         {
@@ -59,20 +65,24 @@ public class Chunk
     /// <summary>
     /// 卸载
     /// </summary>
-    public void Unload()
+    IEnumerator CoroutineUnload()
     {
         GameObject.Destroy(m_body);
         m_body = null;
+        yield return null;
     }
 
     /// <summary>
     /// 缓存
     /// </summary>
-    public void Cache()
+    IEnumerator CoroutineCache()
     {
         if (m_body == null)
         {
-            m_body = Resources.Load<GameObject>(m_resPath);
+            var request = Resources.LoadAsync<GameObject>(m_resPath);
+
+            yield return request;
+            m_body = request.asset as GameObject;
             m_body = GameObject.Instantiate(m_body);
         }
         m_body.SetActive(false);
@@ -92,7 +102,7 @@ public class Chunk
         switch (state)
         {
             case ChunkState.Display:
-                MonoThread.Instance.Excute(Display());
+                Display();
                 break;
             case ChunkState.Cache:
                 Cache();
