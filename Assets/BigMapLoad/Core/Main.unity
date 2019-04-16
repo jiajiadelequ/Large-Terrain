@@ -143,7 +143,6 @@ MonoBehaviour:
   m_row: 16
   m_col: 16
   m_player: {fileID: 1947831567}
-  m_expectChunkPosList: []
   m_currentChunkList: []
   m_chunkLength: 312.5
 --- !u!4 &596787
