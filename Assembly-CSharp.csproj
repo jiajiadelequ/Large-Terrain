@@ -61,13 +61,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BigMapLoad\Core\Scripts\Chunk.cs" />
+    <Compile Include="Assets\BigMapLoad\Core\Scripts\ChunkController.cs" />
+    <Compile Include="Assets\BigMapLoad\Core\Scripts\ChunkVector2.cs" />
+    <Compile Include="Assets\BigMapLoad\Core\Scripts\MonoSingleton.cs" />
+    <Compile Include="Assets\BigMapLoad\Core\Scripts\MonoThread.cs" />
     <Compile Include="Assets\BigMapLoad\Example\Scripts\ChunkExample.cs" />
     <Compile Include="Assets\BigMapLoad\Example\Scripts\ChunkManagerExample.cs" />
-    <Compile Include="Assets\BigMapLoad\Scripts\Core\Chunk.cs" />
-    <Compile Include="Assets\BigMapLoad\Scripts\Core\ChunkController.cs" />
-    <Compile Include="Assets\BigMapLoad\Scripts\Core\ChunkVector2.cs" />
-    <Compile Include="Assets\BigMapLoad\Scripts\Core\MonoSingleton.cs" />
-    <Compile Include="Assets\BigMapLoad\Scripts\Core\MonoThread.cs" />
     <None Include="Assets\TerrainSlicing\Unity4_x_x_users_READ_ME_FIRST.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Neighboring_Quick_Start.txt" />
     <None Include="Assets\TerrainSlicing\Instructions\Slicing_Quick_Start.txt" />
